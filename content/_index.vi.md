@@ -1,19 +1,21 @@
 ---
-title : "Session Management"
+title : "Triên khai ứng dụng trên Docker với AWS"
 date :  "`r Sys.Date()`" 
 weight : 1 
 chapter : false
 ---
-# Làm việc với Amazon System Manager - Session Manager
+### Giới thiệu
+Hướng dẫn triển khai ứng dụng trên Docker sử dụng các dịch vụ AWS như EC2, RDS, và Amazon ECR.
 
-### Tổng quan
+{{% notice tip %}}
+- **Triển khai**: Sử dụng **Amazon ECS** hoặc **Amazon EKS** để quản lý **Container** tối ưu cho môi trường **Production**.
+- **Bảo mật**: Thiết lập **VPC** và **Security Groups** theo đúng **AWS Shared Responsibility Model**.
+- **Chi phí**: Kiểm soát tài nguyên trên **AWS Billing** và thực hiện **Cleanup** ngay sau khi sử dụng.
+{{% /notice %}}
 
- Trong bài lab này, bạn sẽ tìm hiểu các khái niệm cơ bản và thực hành về Amazon System Manager - Session Management. Thực hành tạo kết nối đến máy chủ public và máy chủ private trong VPC.
-
-![ConnectPrivate](/images/arc-log.png) 
+[kiến trúc hệ thống]()
 
 ### Nội dung
-
  1. [Giới thiệu](1-introduce/)
  2. [Các bước chuẩn bị](2-Prerequiste/)
  3. [Tạo kết nối đến máy chủ EC2](3-Accessibilitytoinstance/)

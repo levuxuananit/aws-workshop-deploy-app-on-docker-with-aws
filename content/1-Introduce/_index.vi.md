@@ -5,18 +5,31 @@ weight : 1
 chapter : false
 pre : " <b> 1. </b> "
 ---
-**Session Manager** là một chức năng nằm trong dịch vụ System Manager của AWS, Session Manager cung cấp khả năng quản lý các máy chủ một cách an toàn mà **không cần mở port SSH, không cần Bastion Host hoặc quản lý SSH key**. 
-Session Manager cũng giúp dễ dàng tuân thủ các chính sách của công ty yêu cầu quyền truy cập có kiểm soát, đảm bảo việc bảo mật nghiêm ngặt và ghi log truy việc truy cập trong khi vẫn cung cấp cho người dùng cuối quyền truy cập đa nền tảng.
+Workshop này hướng dẫn quy trình toàn diện từ đóng gói đến vận hành ứng dụng trên Docker Container. Bạn sẽ thực hành quản lý vòng đời ứng dụng thông qua các dịch vụ cốt lõi: Docker Hub, Nginx, Amazon ECR, Amazon RDS và Amazon EC2.
 
-Với việc sử dụng Session Manager, bạn sẽ có được những ưu điểm sau:
+### Hệ thống dịch vụ sử dụng
+- **Docker Hub**: Public Registry để lưu trữ và chia sẻ Docker Images.
+- **Nginx**: Đóng vai trò Reverse Proxy và Load Balancer, tối ưu hóa phân phối lưu lượng và khả năng mở rộng.
+- **Amazon ECR (Elastic Container Registry)**: Private Registry bảo mật trên AWS, tích hợp sâu để quản lý và triển khai Images.
+- **Amazon RDS (Relational Database Service)**: Dịch vụ Managed Database, tự động hóa vận hành và đảm bảo an toàn dữ liệu.
+- **Amazon EC2 (Elastic Compute Cloud)**: Hạ tầng máy chủ ảo (Compute) để chạy các Docker Containers.
 
-- Không cần phải mở cổng 22 cho giao thức SSH.
-- Có thể cấu hình để kết nối không cần đi ra ngoài internet.
-- Không cần quản lý private key của server để kết nối SSH.
-- Quản lý tập trung được user bằng việc sử dụng AWS IAM.
-- Truy cập tới server một cách dễ dàng và đơn giản bằng một cú click chuột.
-- Thời gian truy cập nhanh chóng hơn các phương thức truyền thống như SSH.
-- Hỗ trợ nhiều hệ điều hành khác nhau như Linux, Windows, MacOS.
-- Log lại được các phiên kết nối và các câu lệnh đã thực thi trong lúc kết nối tới server.
+### Quy trình vận hành
+**Traffic Ingress:**
+- Request từ Client được gửi qua Internet, đi qua Internet Gateway để tiến vào hệ thống VPC trên AWS.
+ 
+**Reverse Proxy & Routing:**
+- Nginx tiếp nhận traffic và đóng vai trò Reverse Proxy, điều phối các yêu cầu đến đúng Container: Backend Container, frontend Container
 
-Với những ưu điểm trên, bạn có thể sử dụng Session Manager thay vì sử dụng kỹ thuật Bastion host giúp chúng ta tiết kiệm được thời gian và chi phí khi quản lý server Bastion.
+**App Logic & Data Processing:**
+- Frontend (React) gửi yêu cầu đến Backend (Node.js) để xử lý nghiệp vụ.
+- Backend (Node.js) thực hiện các truy vấn CRUD với Amazon RDS.
+- Dữ liệu sau khi xử lý được trả về (Response) theo luồng ngược lại: **Backend → Nginx → Client**.
+
+**CI/CD & Image Management:**
+- Khi cập nhật mã nguồn (React/Node.js), các Docker Images mới được đóng gói và Push lên Docker Hub hoặc Amazon ECR.
+- Từ các Registry này, ứng dụng sẽ được Deploy hoặc cập nhật trực tiếp lên các instance Amazon EC2.
+  
+{{% notice warning %}}
+Luôn kiểm tra cấu hình Security Groups để đảm bảo kết nối thông suốt giữa Nginx, Backend và RDS.
+{{% /notice %}}
