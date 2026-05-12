@@ -1,4 +1,4 @@
-# Workshop: Deploying Dockerized Apps on AWS
+# WORKSHOP DEPLOYING DOCKERIZED APPS ON AWS
 
 Master the end-to-end process of containerizing and deploying a fullstack application (React & Node.js) on AWS infrastructure.
 
