@@ -59,21 +59,25 @@ Sau khi có các Policy, chúng ta cần tạo một Role để gán cho máy ch
 Tại giao diện quản lý **IAM**
 - Ở danh mục bên trái, chọn **Roles**.
 - Nhấn nút **Create role**.
+![3.21](/images/3.preparation/3.21.png)
 
 Thiết lập thực thể tin cậy
 - Trusted entity type: Chọn **AWS service**.
 - Service or use case: Chọn **EC2**.
 - Nhấn **Next**.
+![3.22](/images/3.preparation/3.22.png)
 
 Gán chính sách
 - Tại ô tìm kiếm, lọc theo Filter by Type: chọn `Customer managed`.
 - Tìm và tích chọn cả 2 policy vừa tạo: `ReadECRRepositoryContent` và `WriteECRRepositoryContent`.
 - Nhấn **Next**.
+![3.23](/images/3.preparation/3.23.png)
 
 Đặt tên và Hoàn tất
 - Role name: `CustomRWECRRole`
 - Description: `Custom Role for EC2 to Read and Write to ECR`.
 - Kiểm tra lại danh sách các policy đã đính kèm và nhấn **Create role**.
+![3.24](/images/3.preparation/3.24.png)
 
 ### Kết quả
 **Tính bảo mật cao**: Thay vì lưu tài khoản/mật khẩu trực tiếp trên máy chủ EC2, chúng ta dùng IAM Role. AWS sẽ tự động cấp một "vé thông hành" (Temporary Credentials) tạm thời cho máy chủ, giúp giảm rủi ro bị lộ lọt thông tin.

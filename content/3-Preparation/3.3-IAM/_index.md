@@ -59,21 +59,25 @@ With the policies created, we now need a **Role** to assign to the EC2 server. T
 In the **IAM** management console:
 - In the left navigation pane, select **Roles**.
 - Click the **Create role** button.
+![3.21](/images/3.preparation/3.21.png)
 
 Set Trusted Entity:
 - **Trusted entity type**: Select **AWS service**.
 - **Service or use case**: Select **EC2**.
 - Click **Next**.
+![3.22](/images/3.preparation/3.22.png)
 
 Attach Policies:
 - In the search box, set the **Filter by Type** to: `Customer managed`.
 - Find and check both policies: `ReadECRRepositoryContent` and `WriteECRRepositoryContent`.
 - Click **Next**.
+![3.23](/images/3.preparation/3.23.png)
 
 Name and Finalize:
 - **Role name**: `CustomRWECRRole`
 - **Description**: `Custom Role for EC2 to Read and Write to ECR`.
 - Review the attached policy list and click **Create role**.
+![3.24](/images/3.preparation/3.24.png)
 
 ### Summary
 **Enhanced Security**: Instead of storing credentials directly on the EC2 server, we use an **IAM Role**. AWS automatically issues **Temporary Credentials** to the server, significantly reducing the risk of credential leakage.
