@@ -11,27 +11,27 @@ We will create two separate **Policies**: one for reading (Pull) and one for wri
 #### Create Policy: ReadECRRepositoryContent (Read Access)
 In the **IAM (Identity and Access Management)** console:
 - In the left navigation pane, select **Policies** and click **Create policy**.
-![3.12](/static/images/3.preparation/3.12.png)
+![3.12](/images/3.preparation/3.12.png)
 
 In the **Policy editor**:
 - Select the service: **Elastic Container Registry**.
 - Click **Next**. 
-![3.13](/static/images/3.preparation/3.13.png)
+![3.13](/images/3.preparation/3.13.png)
 
 Configure Actions:
 - **List group**: Select `DescribeImages` and `ListImages`.
 - **Read group**: Select `BatchGetImage`, `DescribeRepositories`, `GetAccountSettings`, and `GetAuthorizationToken`.
-![3.14](/static/images/3.preparation/3.14.png)
+![3.14](/images/3.preparation/3.14.png)
 
 - **Resources section**: Select **Specific**, then check **Any in this account** (to allow access to all repositories within this account).
 - Click **Next**.
-![3.15](/static/images/3.preparation/3.15.png)
+![3.15](/images/3.preparation/3.15.png)
 
 Finalize Policy Details:
 - **Policy name**: `ReadECRRepositoryContent`
 - **Description**: `Allow pull images and describe repositories`.
 - Click **Create policy**.
-![3.16](/static/images/3.preparation/3.16.png)
+![3.16](/images/3.preparation/3.16.png)
 
 #### Create Policy: WriteECRRepositoryContent (Write Access)
 In the **Policies** interface:
@@ -41,17 +41,17 @@ In the **Policies** interface:
 Configure Actions:
 - **Read group**: Select `BatchCheckLayerAvailability` and `GetAuthorizationToken`.
 - **Write group**: Select `CompleteLayerUpload`, `InitiateLayerUpload`, `PutImage`, and `UploadLayerPart`.
-![3.17](/static/images/3.preparation/3.17.png)
+![3.17](/images/3.preparation/3.17.png)
 
 - **Resources section**: Select **Any in this account**.
 - Click **Next**.
-![3.18](/static/images/3.preparation/3.18.png)
+![3.18](/images/3.preparation/3.18.png)
 
 Finalize Policy Details:
 - **Policy name**: `WriteECRRepositoryContent`
 - **Description**: `Allow push images to ECR`.
 - Click **Create policy**.
-![3.19](/static/images/3.preparation/3.19.png)
+![3.19](/images/3.preparation/3.19.png)
 
 ### Create IAM Role for EC2 Instance
 With the policies created, we now need a **Role** to assign to the EC2 server. This allows the server to interact with ECR securely without requiring manual Access Keys.

@@ -11,27 +11,27 @@ Chúng ta sẽ tạo hai **policy** riêng biệt: một để đọc (Pull) và
 #### Tạo Policy: ReadECRRepositoryContent (Quyền Đọc)
 Ở giao diện **IAM (Identity and Access Management)**
 - Tại danh mục bên trái, chọn **Policies** và nhấn **Create policy**.
-![3.12](/static/images/3.preparation/3.12.png)
+![3.12](/images/3.preparation/3.12.png)
 
 Trong phần **Policy editor**:
 - Chọn service là **Elastic Container Registry**.
 - Chọn **Next**. 
-![3.13](/static/images/3.preparation/3.13.png)
+![3.13](/images/3.preparation/3.13.png)
 
 Cấu hình các quyền (Actions)
 - Nhóm List: Chọn `DescribeImages` và `ListImages`.
 - Nhóm Read: Chọn `BatchGetImage`, `DescribeRepositories`, `GetAccountSettings`, `GetAuthorizationToken`.
-![3.14](/static/images/3.preparation/3.14.png)
+![3.14](/images/3.preparation/3.14.png)
 
 - Phần Resources: Chọn **Specific**, sau đó tích chọn **Any in this account** (cho phép áp dụng với mọi Repository trong tài khoản này).
 - Chọn **Next**.
-![3.15](/static/images/3.preparation/3.15.png)
+![3.15](/images/3.preparation/3.15.png)
 
 Hoàn tất Policy chi tiết
 - Policy name: `ReadECRRepositoryContent`
 - Description: `Allow pull images and describe repositories`.
 - Nhấn **Create policy**.
-![3.16](/static/images/3.preparation/3.16.png)
+![3.16](/images/3.preparation/3.16.png)
 
 #### Tạo Policy: WriteECRRepositoryContent (Quyền Ghi)
 Tại giao diện **Policies**,
@@ -41,17 +41,17 @@ Tại giao diện **Policies**,
 Cấu hình các quyền (Actions)
 - Nhóm Read: Chọn `BatchCheckLayerAvailabilit`y và `GetAuthorizationToken`.
 - Nhóm Write: Chọn `CompleteLayerUpload`, `InitiateLayerUpload`, `PutImage`, và `UploadLayerPart`.
-![3.17](/static/images/3.preparation/3.17.png)
+![3.17](/images/3.preparation/3.17.png)
 
 - Phần Resources: Chọn **Any in this account**.
 - Chọn **Next**.
-![3.18](/static/images/3.preparation/3.18.png)
+![3.18](/images/3.preparation/3.18.png)
 
 Hoàn tất Policy chi tiết
 - Policy name: `WriteECRRepositoryContent`
 - Description: `Allow push images to ECR`.
 - Nhấn **Create policy**.
-![3.19](/static/images/3.preparation/3.19.png)
+![3.19](/images/3.preparation/3.19.png)
 
 ### Khởi tạo IAM Role cho EC2 Instance
 Sau khi có các Policy, chúng ta cần tạo một Role để gán cho máy chủ EC2, giúp máy chủ có quyền tương tác với ECR mà không cần dùng Access Key thủ công.
