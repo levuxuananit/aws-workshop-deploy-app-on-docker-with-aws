@@ -29,7 +29,9 @@ Kiểm tra và hoàn tất khởi tạo:
 
 {{% notice tip %}}
 **Pro Tip**: Việc tích hợp nhiều **Availability Zones** vào một **Subnet Group** là điều kiện tiên quyết để triển khai **kiến trúc Multi-AZ**, giúp cơ sở dữ liệu của bạn tự động duy trì hoạt động ngay cả khi một trung tâm dữ liệu gặp sự cố.
+{{% /notice %}}
 
+{{% notice tip %}}
 **Security Note**: Luôn ưu tiên đặt các **RDS Instance** bên trong **Private Subnet** nhằm cô lập hoàn toàn tài nguyên khỏi môi trường Internet, chỉ cho phép truy xuất nội bộ để tối đa hóa tính bảo mật cho dữ liệu.
 {{% /notice %}}
 

@@ -29,7 +29,9 @@ Review and Finalize Initialization:
 
 {{% notice tip %}}
 **Pro Tip**: Integrating multiple **Availability Zones** into a single **Subnet Group** is a prerequisite for deploying a **Multi-AZ architecture**, allowing your database to automatically maintain operations even if a data center encounters an issue.
+{{% /notice %}}
 
+{{% notice tip %}}
 **Security Note**: Always prioritize placing **RDS Instances** within **Private Subnets** to completely isolate resources from the Internet, allowing only internal access to maximize data security.
 {{% /notice %}}
 
