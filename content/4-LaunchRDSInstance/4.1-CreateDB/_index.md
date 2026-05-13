@@ -21,7 +21,7 @@ Set Basic Identification Parameters:
 Allocate Subnet Resources:
 - Select the **Availability Zones** (AZs) corresponding to your deployed infrastructure.
 - Then, specify **02 Private Subnets** so the system can assign internal IP addresses to the database.
-![4.1.2](images/4-LaunchRDSInstance/4.1.2.png)
+![4.1.2](/images/4-LaunchRDSInstance/4.1.2.png)
 
 Review and Finalize Initialization:
 - Review the list of selected subnets to ensure technical accuracy.

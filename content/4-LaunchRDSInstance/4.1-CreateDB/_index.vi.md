@@ -21,7 +21,7 @@ Thiết lập thông số định danh cơ bản:
 Phân bổ tài nguyên Subnet:
 - Lựa chọn các **Availability Zones** (AZs) tương ứng với kiến trúc hạ tầng đã triển khai.
 - Sau đó chỉ định **02 Private Subnets** để hệ thống có thể cấp phát địa chỉ IP nội bộ cho database.
-![4.1.2](images/4-LaunchRDSInstance/4.1.2.png)
+![4.1.2](/images/4-LaunchRDSInstance/4.1.2.png)
 
 Kiểm tra và hoàn tất khởi tạo:
 - Thực hiện rà soát lại danh sách các subnet đã chọn nhằm đảm bảo tính chính xác về mặt kỹ thuật.

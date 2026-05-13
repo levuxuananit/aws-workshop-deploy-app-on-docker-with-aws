@@ -19,5 +19,5 @@ Amazon RDS (Relational Database Service) is a managed database service on AWS. W
 - **Storage Auto Scaling**: Automatically increases storage capacity as data grows[cite: 1].
 
 ### Content
-1. [Create a DB Subnet Group]()
-2. [Launch an RDS Instance]()
+1. [Create a DB Subnet Group](4-LaunchRDSInstance/4.1-CreateDB)
+2. [Launch an RDS Instance](4-LaunchRDSInstance/4.2-RunInstance)

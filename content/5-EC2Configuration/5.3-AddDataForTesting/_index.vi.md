@@ -24,9 +24,7 @@ Tại phần **Deployment optionals**
 
 {{% notice tip %}}
 Tùy chọn **Multi-AZ DB deployment (2 instances)** được sử dụng để đảm bảo tính sẵn sàng cao (High Availability) và khả năng tự động phục hồi cho hệ thống.
-{{% /notice %}}
 
-{{% notice tip %}}
 Cụ thể, AWS sẽ duy trì một bản sao dự phòng (Standby) tại một vùng sẵn sàng khác và tự động thực hiện failover (chuyển hướng kết nối) nếu bản chính gặp sự cố, giúp giảm thiểu tối đa thời gian gián đoạn (Downtime) mà không cần thay đổi cấu hình ứng dụng.
 {{% /notice %}}
 

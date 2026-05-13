@@ -24,9 +24,7 @@ In the **Deployment options** section:
 
 {{% notice tip %}}
 The **Multi-AZ DB deployment (2 instances)** option is used to ensure **High Availability** and automated recovery for the system. 
-{{% /notice %}}
 
-{{% notice tip %}}
 Specifically, AWS maintains a standby replica in a different Availability Zone and automatically performs a **failover** (re-routing connections) if the primary instance fails. This minimizes downtime without requiring changes to the application configuration.
 {{% /notice %}}
 
