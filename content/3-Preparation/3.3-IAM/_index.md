@@ -1,39 +1,83 @@
 ---
-title : "Create IAM Role"
-date : "`r Sys.Date()`"
-weight : 2
+title : "Creating IAM Roles for ECR Access"
+date :  "`r Sys.Date()`" 
+weight : 3 
 chapter : false
-pre : " <b> 2.2 </b> "
+pre : " <b> 3.3 </b> "
 ---
+### Create IAM Policies for ECR
+We will create two separate **Policies**: one for reading (Pull) and one for writing (Push) data to the **container repository**.
 
-### Create IAM Role
+#### Create Policy: ReadECRRepositoryContent (Read Access)
+In the **IAM (Identity and Access Management)** console:
+- In the left navigation pane, select **Policies** and click **Create policy**.
+![3.12](/static/images/3.preparation/3.12.png)
 
-In this step, we will proceed to create IAM Role. In this IAM Role, the policy **AmazonSSMManagedInstanceCore** will be assigned, this is the policy that allows the EC2 server to communicate with the Session Manager.
+In the **Policy editor**:
+- Select the service: **Elastic Container Registry**.
+- Click **Next**. 
+![3.13](/static/images/3.preparation/3.13.png)
 
-1. Go to [IAM service administration interface](https://console.aws.amazon.com/iamv2/)
-2. In the left navigation bar, click **Roles**.
+Configure Actions:
+- **List group**: Select `DescribeImages` and `ListImages`.
+- **Read group**: Select `BatchGetImage`, `DescribeRepositories`, `GetAccountSettings`, and `GetAuthorizationToken`.
+![3.14](/static/images/3.preparation/3.14.png)
 
-![role](/images/2.prerequisite/038-iamrole.png)
+- **Resources section**: Select **Specific**, then check **Any in this account** (to allow access to all repositories within this account).
+- Click **Next**.
+![3.15](/static/images/3.preparation/3.15.png)
 
-3. Click **Create role**.
+Finalize Policy Details:
+- **Policy name**: `ReadECRRepositoryContent`
+- **Description**: `Allow pull images and describe repositories`.
+- Click **Create policy**.
+![3.16](/static/images/3.preparation/3.16.png)
 
-![role1](/images/2.prerequisite/039-iamrole.png)
+#### Create Policy: WriteECRRepositoryContent (Write Access)
+In the **Policies** interface:
+- Click **Create policy** again.
+- Select the service: **Elastic Container Registry**.
 
-4. Click **AWS service** and click **EC2**.
-  + Click **Next: Permissions**.
+Configure Actions:
+- **Read group**: Select `BatchCheckLayerAvailability` and `GetAuthorizationToken`.
+- **Write group**: Select `CompleteLayerUpload`, `InitiateLayerUpload`, `PutImage`, and `UploadLayerPart`.
+![3.17](/static/images/3.preparation/3.17.png)
 
-![role1](/images/2.prerequisite/40-iamrole.png)
+- **Resources section**: Select **Any in this account**.
+- Click **Next**.
+![3.18](/static/images/3.preparation/3.18.png)
 
-5. In the Search box, enter **AmazonSSMManagedInstanceCore** and press Enter to search for this policy.
-  + Click the policy **AmazonSSMManagedInstanceCore**.
-  + Click **Next: Tags.**
+Finalize Policy Details:
+- **Policy name**: `WriteECRRepositoryContent`
+- **Description**: `Allow push images to ECR`.
+- Click **Create policy**.
+![3.19](/static/images/3.preparation/3.19.png)
 
-![createpolicy](/images/2.prerequisite/041-iamrole.png)
+### Create IAM Role for EC2 Instance
+With the policies created, we now need a **Role** to assign to the EC2 server. This allows the server to interact with ECR securely without requiring manual Access Keys.
 
-6. Click **Next: Review**.
-7. Name the Role **SSM-Role** in Role Name
-  + Click **Create Role** \.
+In the **IAM** management console:
+- In the left navigation pane, select **Roles**.
+- Click the **Create role** button.
 
-![namerole](/images/2.prerequisite/042-iamrole.png)
+Set Trusted Entity:
+- **Trusted entity type**: Select **AWS service**.
+- **Service or use case**: Select **EC2**.
+- Click **Next**.
 
-Next, we will make the connection to the EC2 servers we created with **Session Manager**.
+Attach Policies:
+- In the search box, set the **Filter by Type** to: `Customer managed`.
+- Find and check both policies: `ReadECRRepositoryContent` and `WriteECRRepositoryContent`.
+- Click **Next**.
+
+Name and Finalize:
+- **Role name**: `CustomRWECRRole`
+- **Description**: `Custom Role for EC2 to Read and Write to ECR`.
+- Review the attached policy list and click **Create role**.
+
+### Summary
+**Enhanced Security**: Instead of storing credentials directly on the EC2 server, we use an **IAM Role**. AWS automatically issues **Temporary Credentials** to the server, significantly reducing the risk of credential leakage.
+
+**Principle of Least Privilege**: Splitting policies into Read and Write ensures tight control:
+- Only servers responsible for building and pushing images are granted **Write** permissions.
+- Production servers running the application only require **Read** permissions.

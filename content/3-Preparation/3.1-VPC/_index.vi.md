@@ -58,4 +58,3 @@ Tại bảng cấu hình, tìm đến phần **Auto-assign IP settings**
 ![3.8](/images/3.preparation/3.8.png)
 
 Hoàn tất việc cấu hình VPC và kích hoạt tính năng tự động cấp phát **Public IPv4** cho các Public Subnet. Giờ đây, bất kỳ tài nguyên nào (như EC2 Instance) khi được triển khai vào các Subnet này sẽ mặc định có địa chỉ IP công cộng để giao tiếp với Internet.
-

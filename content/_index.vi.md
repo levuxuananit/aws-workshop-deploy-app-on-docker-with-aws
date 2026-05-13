@@ -5,20 +5,15 @@ weight : 1
 chapter : false
 ---
 ### Giới thiệu
-Hướng dẫn triển khai ứng dụng trên Docker sử dụng các dịch vụ AWS như EC2, RDS, và Amazon ECR.
+Chào mừng bạn đến với **Workshop triên khai ứng dụng trên Docker với AWS**!
 
-{{% notice tip %}}
-- **Triển khai**: Sử dụng **Amazon ECS** hoặc **Amazon EKS** để quản lý **Container** tối ưu cho môi trường **Production**.
-- **Bảo mật**: Thiết lập **VPC** và **Security Groups** theo đúng **AWS Shared Responsibility Model**.
-- **Chi phí**: Kiểm soát tài nguyên trên **AWS Billing** và thực hiện **Cleanup** ngay sau khi sử dụng.
-{{% /notice %}}
+Chúng ta sẽ cùng nhau chinh phục quy trình triển khai chuẩn doanh nghiệp: từ đóng gói ứng dụng bằng Docker, quản lý kho ảnh trên **Amazon ECR**, đến việc thiết lập hạ tầng với **EC2** và **RDS**. Đây là cơ hội để bạn làm chủ kỹ năng đưa ứng dụng từ máy cục bộ lên nền tảng Cloud mạnh mẽ nhất thế giới.
 
-[kiến trúc hệ thống]()
+Không chỉ dừng lại ở việc vận hành, bạn sẽ được hướng dẫn thiết lập **mạng VPC** và **Security Groups** bảo mật chuyên sâu theo [mô hình chia sẻ trách nhiệm](https://aws.amazon.com/vi/compliance/shared-responsibility-model/).
+
+Hãy sẵn sàng để tư duy như một Cloud Engineer thực thụ, tối ưu hóa hiệu suất với Docker Compose và quản lý tài nguyên thông minh để bứt phá mọi giới hạn công nghệ!
 
 ### Nội dung
- 1. [Giới thiệu](1-introduce/)
- 2. [Các bước chuẩn bị](2-Prerequiste/)
- 3. [Tạo kết nối đến máy chủ EC2](3-Accessibilitytoinstance/)
- 4. [Quản lý session logs](4-s3log/)
- 5. [Port Forwarding](5-Portfwd/)
- 6. [Dọn dẹp tài nguyên](6-cleanup/)
+ 1. [Giới thiệu](1-Introduce/)
+ 2. [Triển khai trên local](2-Local/)
+ 3. [Chuẩn bị](3-Preparation/)

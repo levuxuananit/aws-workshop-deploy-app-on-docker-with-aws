@@ -1,39 +1,51 @@
 ---
-title : "Create IAM Role"
-date : "`r Sys.Date()`"
-weight : 2
+title : "Security Group Configuration"
+date :  "`r Sys.Date()`" 
+weight : 2 
 chapter : false
-pre : " <b> 2.2 </b> "
+pre : " <b> 3.2 </b> "
 ---
+### Configure Security Group for EC2 Instances (Public Access)
+This **Security Group** acts as a virtual firewall for Web or Application servers that need to communicate with the Internet.
 
-### Create IAM Role
+In the **EC2** management console:
+- In the left navigation pane, locate the **Network & Security** section.
+- Select **Security Groups**.
+- Click the **Create security group** button.
+![3.9](/images/3.preparation/3.9.png)
 
-In this step, we will proceed to create IAM Role. In this IAM Role, the policy **AmazonSSMManagedInstanceCore** will be assigned, this is the policy that allows the EC2 server to communicate with the Session Manager.
+Set Basic Information:
+- **Security group name**: `table-cloud-pos-sg-public`
+- **Description**: `SG for Table Cloud POS`
+- **VPC**: Select `table-cloud-pos` (Ensure you select the VPC created in the previous step, not the default VPC).
 
-1. Go to [IAM service administration interface](https://console.aws.amazon.com/iamv2/)
-2. In the left navigation bar, click **Roles**.
+Configure **Inbound rules**:
+- Select **Add rule**.
+- **Rule 1**: Type `SSH`, Source `Anywhere-IPv4` (0.0.0.0/0) — allows administrators to access the server remotely via command line.
+- **Rule 2**: Type `HTTP`, Source `Anywhere-IPv4` (0.0.0.0/0) — allows users to access the website via standard web protocol.
+- **Rule 3**: Type `HTTPS`, Source `Anywhere-IPv4` (0.0.0.0/0) — allows secure web access via SSL/TLS certificates.
+- **Rule 4**: Type `Custom TCP`, Port range `3000`, Source `Anywhere-IPv4` (0.0.0.0/0) — opens a specific port for applications (e.g., Node.js or React) commonly running on port 3000.
+![3.10](/images/3.preparation/3.10.png)
 
-![role](/images/2.prerequisite/038-iamrole.png)
+Leave **Outbound rules** as default so the server can freely download updates from the Internet. Click **Create security group**.
 
-3. Click **Create role**.
+### Configure Security Group for Database Instances (Private Access)
+This **Security Group** is designed to protect the database by only allowing access from internal servers, maximizing security.
 
-![role1](/images/2.prerequisite/039-iamrole.png)
+In the **Security Groups** interface, click **Create security group** again.
 
-4. Click **AWS service** and click **EC2**.
-  + Click **Next: Permissions**.
+Set Basic Information:
+- **Security group name**: `table-cloud-sg-db`
+- **Description**: `SG for Table Cloud POS database`
+- **VPC**: Select `table-cloud-pos`
 
-![role1](/images/2.prerequisite/40-iamrole.png)
+Configure **Inbound rules**:
+- Select **Add rule**.
+- **Type**: `MySQL/Aurora` (Default port 3306).
+- **Source**: Instead of an IP address, search for and select the `table-cloud-pos-sg-public` security group itself.
+- This rule only permits EC2 instances associated with the **table-cloud-pos-sg-public** group to connect to the Database. All access attempts from the public Internet will be completely blocked.
+- **Outbound rules**: Leave as default.
+- Click **Create security group**.
+![3.11](/images/3.preparation/3.11.png)
 
-5. In the Search box, enter **AmazonSSMManagedInstanceCore** and press Enter to search for this policy.
-  + Click the policy **AmazonSSMManagedInstanceCore**.
-  + Click **Next: Tags.**
-
-![createpolicy](/images/2.prerequisite/041-iamrole.png)
-
-6. Click **Next: Review**.
-7. Name the Role **SSM-Role** in Role Name
-  + Click **Create Role** \.
-
-![namerole](/images/2.prerequisite/042-iamrole.png)
-
-Next, we will make the connection to the EC2 servers we created with **Session Manager**.
+You have successfully created a two-tier security architecture: a Web tier (Public SG) open to the Internet, and a Database tier (Private SG) open only to the Web tier. This is a standard security best practice on AWS.

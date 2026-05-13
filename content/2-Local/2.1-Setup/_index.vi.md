@@ -17,4 +17,3 @@ Mặc định khi cài đặt **Node.js** sẽ kèm theo `npm`, kiểm tra **Nod
   npm -v
 ```
 Nếu màn hình hiển thị số phiên bản (ví dụ: `v20.x.x` và `10.x.x`), bạn đã cài đặt thành công.
-

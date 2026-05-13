@@ -1,39 +1,32 @@
 ---
-title : "Create IAM Role"
-date : "`r Sys.Date()`"
-weight : 2
+title : "Testing the Application"
+date :  "`r Sys.Date()`" 
+weight : 3 
 chapter : false
-pre : " <b> 2.2 </b> "
+pre : " <b> 2.3 </b> "
 ---
+### Verification of Deployment
+Access `http://localhost:5173`. You should see the following interface:
 
-### Create IAM Role
+![2.3.1](/images/2.local/2.3.1.png)
 
-In this step, we will proceed to create IAM Role. In this IAM Role, the policy **AmazonSSMManagedInstanceCore** will be assigned, this is the policy that allows the EC2 server to communicate with the Session Manager.
+### User Authentication
+Use one of the following accounts to log in to the application:
+**User**: `user@example.com` / `123456`.
+**Admin**: `admin@example.com` / `123456`.
 
-1. Go to [IAM service administration interface](https://console.aws.amazon.com/iamv2/)
-2. In the left navigation bar, click **Roles**.
+{{% notice tip %}}
+In a real-world production environment, it is recommended to use **AWS IAM Identity Center** or **Amazon Cognito** for more secure authentication.
+{{% /notice %}}
 
-![role](/images/2.prerequisite/038-iamrole.png)
+### Interface Testing
+Confirm a successful login and verify the consistency of the displayed data. Then, navigate through different routes to ensure the system's navigation works smoothly.
 
-3. Click **Create role**.
+![2.3.2](images/2.local/2.3.2.png)
+![2.3.3](images/2.local/2.3.3.png)
+![2.3.4](images/2.local/2.3.4.png)
+![2.3.5](images/2.local/2.3.5.png)
+![2.3.6](images/2.local/2.3.6.png)
 
-![role1](/images/2.prerequisite/039-iamrole.png)
-
-4. Click **AWS service** and click **EC2**.
-  + Click **Next: Permissions**.
-
-![role1](/images/2.prerequisite/40-iamrole.png)
-
-5. In the Search box, enter **AmazonSSMManagedInstanceCore** and press Enter to search for this policy.
-  + Click the policy **AmazonSSMManagedInstanceCore**.
-  + Click **Next: Tags.**
-
-![createpolicy](/images/2.prerequisite/041-iamrole.png)
-
-6. Click **Next: Review**.
-7. Name the Role **SSM-Role** in Role Name
-  + Click **Create Role** \.
-
-![namerole](/images/2.prerequisite/042-iamrole.png)
-
-Next, we will make the connection to the EC2 servers we created with **Session Manager**.
+### Preparing for AWS Deployment
+A stable local operation is a critical milestone confirming that the source code is ready. In the next chapter, we will perform **Cloud Migration** to move the application to the **AWS Cloud**. By combining **Docker** with **Amazon ECS** (Elastic Container Service), you will master how to leverage **Auto-scaling** capabilities and centralized container management according to **Enterprise** standards.

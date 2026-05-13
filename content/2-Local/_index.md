@@ -1,21 +1,17 @@
 ---
-title : "Preparation "
-date : "`r Sys.Date()`"
-weight : 2
+title : "Local Deployment"
+date :  "`r Sys.Date()`" 
+weight : 2 
 chapter : false
 pre : " <b> 2. </b> "
 ---
+Why should we containerize applications with **Docker Container** instead of running them directly on a local operating system?
 
-{{% notice info %}}
-You need to create 1 Linux instance on the public subnet and 1 Window instance on the private subnet to perform this lab.
-{{% /notice %}}
+For an application to operate reliably and smoothly handle user requests (CRUD operations), it must consume hardware resources from the host server. However, traditional deployment often leads to the "it works on my machine" syndrome due to environment discrepancies.
 
-To learn how to create EC2 instances and VPCs with public/private subnets, you can refer to the lab:
-  - [About Amazon EC2](https://000004.awsstudygroup.com/en/)
-  - [Works with Amazon VPC](https://000003.awsstudygroup.com/en/)
-
-In order to use System Manager to manage our window instances in particular and our instances in general on AWS, we need to give permission to our instances to be able to work with System Manager. In this preparation, we will also proceed to create an IAM Role to grant permissions to instances that can work with System Manager.
+In this section, we will deploy a sample application directly on your machine to observe how Docker effectively resolves environment conflicts and optimizes resource management.
 
 ### Content
-  - [Prepare VPC and EC2](2.1-createec2/)
-  - [Create IAM Role](2.2-createiamrole/)
+1. [Environment Setup](2-Local/2.1-Setup)
+2. [Application Deployment](2-Local/2.2-Deploy)
+3. [Testing the Application](2-Local/2.3-Testing)

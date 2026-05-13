@@ -1,39 +1,10 @@
 ---
-title : "Create IAM Role"
-date : "`r Sys.Date()`"
-weight : 2
+title : "Docker Hub Authentication"
+date :  "`r Sys.Date()`" 
+weight : 4 
 chapter : false
-pre : " <b> 2.2 </b> "
+pre : " <b> 3.4 </b> "
 ---
-
-### Create IAM Role
-
-In this step, we will proceed to create IAM Role. In this IAM Role, the policy **AmazonSSMManagedInstanceCore** will be assigned, this is the policy that allows the EC2 server to communicate with the Session Manager.
-
-1. Go to [IAM service administration interface](https://console.aws.amazon.com/iamv2/)
-2. In the left navigation bar, click **Roles**.
-
-![role](/images/2.prerequisite/038-iamrole.png)
-
-3. Click **Create role**.
-
-![role1](/images/2.prerequisite/039-iamrole.png)
-
-4. Click **AWS service** and click **EC2**.
-  + Click **Next: Permissions**.
-
-![role1](/images/2.prerequisite/40-iamrole.png)
-
-5. In the Search box, enter **AmazonSSMManagedInstanceCore** and press Enter to search for this policy.
-  + Click the policy **AmazonSSMManagedInstanceCore**.
-  + Click **Next: Tags.**
-
-![createpolicy](/images/2.prerequisite/041-iamrole.png)
-
-6. Click **Next: Review**.
-7. Name the Role **SSM-Role** in Role Name
-  + Click **Create Role** \.
-
-![namerole](/images/2.prerequisite/042-iamrole.png)
-
-Next, we will make the connection to the EC2 servers we created with **Session Manager**.
+### Login to Docker Hub
+Access [https://hub.docker.com/](https://hub.docker.com/) and log in to your **Docker Hub** account.
+![3.20](/images/3.preparation/3.20.png)
