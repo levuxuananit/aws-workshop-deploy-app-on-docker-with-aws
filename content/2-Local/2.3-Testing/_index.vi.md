@@ -22,11 +22,11 @@ Trong môi trường sản xuất thực tế, cần sử dụng **AWS IAM Ident
 ### Kiểm tra giao diện
 Xác nhận đăng nhập thành công và kiểm tra tính nhất quán của dữ liệu hiển thị, sau đó thao tác trên các Route khác nhau để đảm bảo hệ thống điều hướng (Navigation) hoạt động ổn định.
 
-![2.3.2](images/2.local/2.3.2.png)
-![2.3.3](images/2.local/2.3.3.png)
-![2.3.4](images/2.local/2.3.4.png)
-![2.3.5](images/2.local/2.3.5.png)
-![2.3.6](images/2.local/2.3.6.png)
+![2.3.2](/images/2.local/2.3.2.png)
+![2.3.3](/images/2.local/2.3.3.png)
+![2.3.4](/images/2.local/2.3.4.png)
+![2.3.5](/images/2.local/2.3.5.png)
+![2.3.6](/images/2.local/2.3.6.png)
 
 ### Chuẩn bị cho triển khai AWS
 Hệ thống vận hành ổn định trên Local là nền tảng quan trọng khẳng định mã nguồn đã sẵn sàng. Ở chương tiếp theo, chúng ta sẽ thực hiện **Cloud Migration** để đưa ứng dụng lên **AWS Cloud**. Bằng cách kết hợp **Docker** và **Amazon ECS** (Elastic Container Service), bạn sẽ nắm vững cách tận dụng khả năng tự động mở rộng (Auto-scaling) và quản lý Containers tập trung theo tiêu chuẩn **Enterprise**.
