@@ -27,8 +27,7 @@ Cấu hình **Inbound rules**:
 - **Quy tắc 4**: Chọn Type `Custom TCP`, Port range `3000`, Source `Anywhere-IPv4` (0.0.0.0/0), mở cổng đặc thù cho ứng dụng (ví dụ: Node.js hoặc React) thường chạy ở port 3000.
 ![3.10](/images/3.preparation/3.10.png)
 
-Giữ nguyên mặc định của **Outbound rules** để server có thể tự do tải cập nhật từ Internet.
-- Nhấn **Create security group**.
+Giữ nguyên mặc định của **Outbound rules** để server có thể tự do tải cập nhật từ Internet. Nhấn **Create security group**.
 
 ### Cấu hình Security Group cho Database Instance (Private Access)
 **Security Group** này được thiết lập để bảo vệ cơ sở dữ liệu, chỉ cho phép các máy chủ nội bộ truy cập, giúp tăng tối đa tính bảo mật.
@@ -49,4 +48,4 @@ Cấu hình quy tắc đầu vào (Inbound rules)
 - Nhấn **Create security group**.
 ![3.11](/images/3.preparation/3.11.png)
 
-Bạn đã tạo ra một kiến trúc bảo mật 2 lớp: Lớp Web (Public SG) mở cửa cho Internet, và lớp Database (Private SG) chỉ mở cửa cho lớp Web. Đây là mô hình bảo mật tiêu chuẩn trên AWS.
+Bạn đã tạo ra một kiến trúc bảo mật 2 lớp:Lớp Web (Public SG) mở cửa cho Internet, và lớp Database (Private SG) chỉ mở cửa cho lớp Web. Đây là mô hình bảo mật tiêu chuẩn trên AWS.
