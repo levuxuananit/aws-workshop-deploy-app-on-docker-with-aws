@@ -82,7 +82,7 @@ sudo apt install mysql-client -y
 Trước khi bắt đầu triển khai, hãy đảm bảo các công cụ đã được cài đặt chính xác bằng cách kiểm tra phiên bản:
 - Docker: `docker --version`
 - MySQL Client: `mysql --version`
-- Git: git `--version` (Thường đã có sẵn trên Ubuntu 24.04).
+- Git: `git --version` (Thường đã có sẵn trên Ubuntu 24.04).
 ![5.2.8](/images/5.EC2Config/5.2.8.png)
 ![5.2.9](/images/5.EC2Config/5.2.9.png)
 

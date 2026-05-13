@@ -1,51 +1,59 @@
 ---
-title : "Khởi chạy RDS Instance"
+title : "Khởi tạo Dữ liệu cho Amazon RDS"
 date :  "`r Sys.Date()`" 
-weight : 2 
+weight : 3 
 chapter : false
-pre : " <b> 4.2 </b> "
+pre : " <b> 5.3 </b> "
 ---
-### Tạo RDS Instance
-Tìm đến trang quản lý của **Aurora và RDS**, tại thanh điều hướng bên trái
-- Chọn **Databases**
-- Chọn **Create Database**
-- Chọn **Full configuration**
-![4.2.1](/images/4-LaunchRDSInstance/4.2.1.png)
+Để ứng dụng có thể vận hành và hiển thị thông tin, chúng ta cần nạp các bản ghi ban đầu vào cơ sở dữ liệu Amazon RDS thông qua file kịch bản SQL có sẵn trong mã nguồn.
 
-Tại trang **Create database**:
-- Chọn loại: **MySQL**
-- Chọn phương thức tạo: **Full configuration**
-- Chọn template: **Dev/Test**
-![4.2.2](/images/4-LaunchRDSInstance/4.2.2.png)
+### Chuẩn bị Script SQL
+Đầu tiên, chúng ta cần xác định đường dẫn tuyệt đối của file init.sql để thực thi chính xác trong môi trường MySQL.
+- Di chuyển vào thư mục database:
+```bash
+cd ~/aws-fcj-container-app/database
+```
 
-Tại phần **Deployment optionals**
-- Chọn: **Multi-AZ DB deployment (2 instances)**
-![4.2.3](/images/4-LaunchRDSInstance/4.2.3.png)
+- Lấy đường dẫn đầy đủ của file:
+```bash
+echo $(pwd)/init.sql
+```
 
-{{% notice tip %}}
-Tùy chọn **Multi-AZ DB deployment (2 instances)** được sử dụng để đảm bảo tính sẵn sàng cao (High Availability) và khả năng tự động phục hồi cho hệ thống.
+- Thông thường sẽ là: `/home/ubuntu/aws-fcj-container-app/database/init.sql`.
+- Hãy sao chép đường dẫn này
 
-Cụ thể, AWS sẽ duy trì một bản sao dự phòng (Standby) tại một vùng sẵn sàng khác và tự động thực hiện failover (chuyển hướng kết nối) nếu bản chính gặp sự cố, giúp giảm thiểu tối đa thời gian gián đoạn (Downtime) mà không cần thay đổi cấu hình ứng dụng.
-{{% /notice %}}
+### Kết nối tới RDS Instance
+Sử dụng công cụ mysql-client để thiết lập kết nối từ EC2 đến máy chủ cơ sở dữ liệu.
+- Lấy thông tin Endpoint: Truy cập giao diện RDS Console, chọn Database Instance bạn đã tạo và sao chép giá trị tại mục Endpoint.
+- Thực hiện lệnh kết nối:
+```bash
+mysql -h <your-rds-endpoint> -u admin -p
+```
+- Nhập mật khẩu bạn đã thiết lập khi tạo RDS để đăng nhập
 
-- Nhập tên DB instance: `table-cloud-pos-rds-instance`
-- Nhập username: `admin`
-- Nhập mật khẩu: `tablecloudpos2026`
-![4.2.4](/images/4-LaunchRDSInstance/4.2.4.png)
+### Thực thi Script nạp dữ liệu
+Sau khi đã truy cập vào giao diện dòng lệnh của MySQL, hãy sử dụng lệnh source kèm theo đường dẫn đã sao chép ở Bước 1 để chạy script:
+```bash
+source /home/ubuntu/aws-fcj-container-app/database/init.sql;
+```
 
-- Chọn **Stand Classes (includes m classes)**
-- Chọn loại instance: **db.m6gd.large(support Amazon RDS Optimized Writes)**
-![4.2.5](/images/4-LaunchRDSInstance/4.2.5.png)
+### Kiểm tra và Xác nhận Kết quả
+Hãy đảm bảo rằng dữ liệu đã được cấu trúc và nhập vào thành công bằng các câu lệnh truy vấn sau:
+- Kiểm tra danh sách Database:
+```sql
+SHOW DATABASES;
+```
+- Bạn sẽ thấy database fcjresbar xuất hiện trong danh sách
 
-- Tài nguyên tính toán: Tích chọn **Don't connect to an EC2 Instance resource**
-- Kết nối tới VPC **table-cloud-pos-vpc**
-- Chọn Subnet **table-cloud-pos-db**
-- Public Access: Tích chọn **No**
-![4.2.6](/images/4-LaunchRDSInstance/4.2.6.png)
+Kiểm tra chi tiết dữ liệu:
+- Truy cập vào database:
+```sql
+USE fcjresbar;
+```
 
-- Chọn **Security group** đã tạo cho DB: **table-cloud-pos-sg**
-- Certificate authority: Chọn chứng chỉ mặc định **rds-ca-rsa2048-1**
-![4.2.7](/images/4-LaunchRDSInstance/4.2.7.png)
+- Truy vấn bảng dữ liệu:
+```sql
+SELECT * FROM Clients;
+```
 
-- Kiểm tra kĩ lại các cấu hình và chọn **Create**
-- Hoàn tất tạo DB instance và quá trình này phải chờ khoảng 15 phút để hiện Available
+Lưu ý: Nếu bạn không thể kết nối, hãy kiểm tra lại Inbound Rules của Security Group gán cho RDS. Đảm bảo port 3306 đã được mở cho Security Group của máy chủ EC2.
