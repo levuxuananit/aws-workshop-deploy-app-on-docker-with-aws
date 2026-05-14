@@ -1,14 +1,13 @@
 ---
-title : "EC2 Instance Configuration"
-date :  "`r Sys.Date()`" 
-weight : 5 
-chapter : false
-pre : " <b> 5. </b> "
+title: "Deploying on Docker Image"
+date: "`r Sys.Date()`"
+weight: 6
+chapter: false
+pre: "<b>6.</b>"
 ---
-### EC2 Instance Configuration
-In this section, we will create an EC2 server, install the required libraries, and import the initial data into the previously created database.
+### Introduction
+In the previous section, we successfully added and executed libraries and packages. Now we will use those dependencies to perform the operations in this section.
 
-### Content
-1. [Launch an EC2 Instance](5-EC2Configuration/5.1-EC2Config)
-2. [Install Required Libraries](5-EC2Configuration/5.2-InstallLibraries)
-3. [Import Test Data](5-EC2Configuration/5.3-AddDataForTesting)
+### Contents
+1. [Deploy Application](6-DockerImage/6.1-DeployApp)
+2. [Test Application](6-DockerImage/6.2-TestApp)

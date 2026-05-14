@@ -94,6 +94,12 @@ sudo docker run -d -p 3000:80 --network my-network --name frontend frontend-imag
 ```
 ![6.1.7](/images/6-DockerImage/6.1.7.png)
 
+### Checking Running Containers
+Check if the **backend-containers** and **frontend-containers** built from **backend-images** and **front-images** are running stably on the **EC2 Instance** server.
+
+- Type the command `sudo docker ps`
+![6.1.12](/images/6-DockerImage/6.1.12.png)
+
 ### Troubleshooting Version Errors
 Specifically, for the project being deployed, Vite requires the Crypto Web API, which is only fully and stably supported from Node.js version **18 or 20 and above**. In your Docker Container environment, if your Node.js version is lower than this, you will receive an error like this:
 ![6.1.8](/images/6-DockerImage/6.1.8.png)
@@ -102,7 +108,7 @@ Solution:
 
 - Access the **DockerFile** of the **frontend**
 
-- Change FROM to `node-20-alpine` (upgrade to a higher version to ensure the **Crypto Web API** runs stably)
+- Change to `node-20-alpine` (upgrade to a higher version to ensure the **Crypto Web API** runs stably)
 ![6.1.9](/images/6-DockerImage/6.1.9.png)
 
 ![6.1.10](/images/6-DockerImage/6.1.10.png)
