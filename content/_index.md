@@ -17,4 +17,6 @@ Get ready to think like a true Cloud Engineer—optimizing performance with **Do
 ### Content
  1. [Introduction](1-Introduce/)
  2. [Local Deployment](2-Local/)
- 3. [Prerequisites](3-Preparation/)
+ 3. [Preparation](3-Preparation/)
+ 4. [Initialize RDS Instance](4-LaunchRDSInstance/)
+ 5. [EC2 Instance Configuration](5-EC2Configuration/)

@@ -17,3 +17,5 @@ Hãy sẵn sàng để tư duy như một Cloud Engineer thực thụ, tối ưu
  1. [Giới thiệu](1-Introduce/)
  2. [Triển khai trên local](2-Local/)
  3. [Chuẩn bị](3-Preparation/)
+ 4. [Khởi tạo RDS Instance](4-LaunchRDSInstance/)
+ 5. [Cấu hình EC2 Instance](5-EC2Configuration/)
