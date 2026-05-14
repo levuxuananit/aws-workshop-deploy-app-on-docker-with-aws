@@ -1,51 +1,60 @@
 ---
-title : "Launching an RDS Instance"
-date :  "`r Sys.Date()`" 
-weight : 2 
-chapter : false
-pre : " <b> 4.2 </b> "
+title: "Initializing Data for Amazon RDS"
+date: "`r Sys.Date()`"
+weight: 3
+chapter: false
+pre: "<b>5.3</b>"
 ---
-### Create RDS Instance
-Navigate to the **Aurora and RDS** management page. From the left navigation bar:
-- Select **Databases**.
-- Click **Create Database**.
-- Select **Standard create**.
-![4.2.1](/images/4-LaunchRDSInstance/4.2.1.png)
+To enable the application to run and display information, we need to load the initial records into the Amazon RDS database using the SQL script file available in the source code.
 
-On the **Create database** page:
-- **Engine type**: Select **MySQL**.
-- **Creation method**: Select **Standard create**.
-- **Templates**: Select **Dev/Test**.
-![4.2.2](/images/4-LaunchRDSInstance/4.2.2.png)
+### Preparing the SQL Script
+First, we need to determine the absolute path of the `init.sql` file to execute correctly in the MySQL environment.
 
-In the **Deployment options** section:
-- Select: **Multi-AZ DB deployment (2 instances)**.
-![4.2.3](/images/4-LaunchRDSInstance/4.2.3.png)
+- Navigate to the **database** directory:
+```bash
+cd database
+ls
+```
+Get the absolute path of the `init.sql` file
+- Usually it will be: `/home/ubuntu/aws-table-cloud-pos/database/init.sql`.
+
+- Copy this path:
+```bash
+echo $(pwd)/init.sql
+```
+
+![5.3.1](/images/5.EC2Config/5.3.1.png)
+
+### Connecting to RDS Instance
+Use the mysql-client tool in VSCode to establish a connection from EC2 to the database server.
+
+- Get Endpoint information: Access the **RDS Console** interface, select the **Database Instance** you created, and copy the value in the **Connectivity & Security** section.
+
+![5.3.2](/images/5.EC2Config/5.3.2.png)
+
+- Enter the password you set when creating the RDS to log in.
+
+![5.3.3](/images/5.EC2Config/5.3.3.png)
+
+### Executing the Data Loading Script
+After accessing the MySQL command-line interface, use the source command with the path copied in Step 1 to run the script:
+```bash
+source /home/ubuntu/aws-table-cloud-pos/database/init.sql
+```
+![5.3.4](/images/5.EC2Config/5.3.4.png)
+
+### Checking and Confirming the Results
+Ensure that the data has been successfully structured and imported using the following query statements:
+- Check if the **tablecloudpos** database and **Clients** data exist:
+```sql
+SHOW DATABASES;
+
+USE fcjresbar;
+
+SELECT * FROM Clients;
+```
+![5.3.5](/images/5.EC2Config/5.3.5.png)
 
 {{% notice tip %}}
-The **Multi-AZ DB deployment (2 instances)** option is used to ensure **High Availability** and automated recovery for the system. 
-
-Specifically, AWS maintains a standby replica in a different Availability Zone and automatically performs a **failover** (re-routing connections) if the primary instance fails. This minimizes downtime without requiring changes to the application configuration.
+Note: If you cannot connect, please check the Inbound Rules of the Security Group assigned to RDS. Ensure that port 3306 is open to the EC2 server's Security Group.
 {{% /notice %}}
-
-- **DB instance identifier**: `table-cloud-pos-rds-instance`
-- **Master username**: `admin`
-- **Master password**: `tablecloudpos2026`
-![4.2.4](/images/4-LaunchRDSInstance/4.2.4.png)
-
-- Select **Standard Classes (includes m classes)**.
-- **Instance configuration**: Select **db.m6gd.large (supports Amazon RDS Optimized Writes)**.
-![4.2.5](/images/4-LaunchRDSInstance/4.2.5.png)
-
-- **Connectivity**: Select **Don't connect to an EC2 compute resource**.
-- **Virtual Private Cloud (VPC)**: Select `table-cloud-pos-vpc`.
-- **DB Subnet group**: Select `table-cloud-pos-db`.
-- **Public access**: Select **No**.
-![4.2.6](/images/4-LaunchRDSInstance/4.2.6.png)
-
-- **Existing VPC security groups**: Select the DB security group created earlier: `table-cloud-pos-sg`.
-- **Certificate authority**: Select the default certificate **rds-ca-rsa2048-1**.
-![4.2.7](/images/4-LaunchRDSInstance/4.2.7.png)
-
-- Review all configurations carefully and click **Create database**.
-- The initialization process is complete. It typically takes about 15 minutes for the status to show as **Available**.

@@ -8,52 +8,49 @@ pre : " <b> 5.3 </b> "
 Để ứng dụng có thể vận hành và hiển thị thông tin, chúng ta cần nạp các bản ghi ban đầu vào cơ sở dữ liệu Amazon RDS thông qua file kịch bản SQL có sẵn trong mã nguồn.
 
 ### Chuẩn bị Script SQL
-Đầu tiên, chúng ta cần xác định đường dẫn tuyệt đối của file init.sql để thực thi chính xác trong môi trường MySQL.
-- Di chuyển vào thư mục database:
+Đầu tiên, chúng ta cần xác định đường dẫn tuyệt đối của file `init.sql` để thực thi chính xác trong môi trường MySQL.
+- Di chuyển vào thư mục **database**:
 ```bash
-cd ~/aws-fcj-container-app/database
+cd database
+ls
 ```
 
-- Lấy đường dẫn đầy đủ của file:
+Lấy đường dẫn tuyệt đối của  file `init.sql`
+- Thông thường sẽ là: `/home/ubuntu/aws-table-cloud-pos/database/init.sql`.
+- Hãy sao chép đường dẫn này
 ```bash
 echo $(pwd)/init.sql
 ```
 
-- Thông thường sẽ là: `/home/ubuntu/aws-fcj-container-app/database/init.sql`.
-- Hãy sao chép đường dẫn này
+![5.3.1](/images/5.EC2Config/5.3.1.png)
 
 ### Kết nối tới RDS Instance
-Sử dụng công cụ mysql-client để thiết lập kết nối từ EC2 đến máy chủ cơ sở dữ liệu.
-- Lấy thông tin Endpoint: Truy cập giao diện RDS Console, chọn Database Instance bạn đã tạo và sao chép giá trị tại mục Endpoint.
-- Thực hiện lệnh kết nối:
-```bash
-mysql -h <your-rds-endpoint> -u admin -p
-```
-- Nhập mật khẩu bạn đã thiết lập khi tạo RDS để đăng nhập
+Sử dụng công cụ mysql-client trên VSCode để thiết lập kết nối từ EC2 đến máy chủ cơ sở dữ liệu.
+- Lấy thông tin Endpoint: Truy cập giao diện **RDS Console**, chọn **Database Instance** bạn đã tạo và sao chép giá trị tại mục **Connectivity & Security**.
+![5.3.2](/images/5.EC2Config/5.3.2.png)
+
+- Nhập mật khẩu bạn đã thiết lập khi tạo RDS để đăng nhập.
+![5.3.3](/images/5.EC2Config/5.3.3.png)
 
 ### Thực thi Script nạp dữ liệu
 Sau khi đã truy cập vào giao diện dòng lệnh của MySQL, hãy sử dụng lệnh source kèm theo đường dẫn đã sao chép ở Bước 1 để chạy script:
 ```bash
-source /home/ubuntu/aws-fcj-container-app/database/init.sql;
+source /home/ubuntu/aws-table-cloud-pos/database/init.sql
 ```
+![5.3.4](/images/5.EC2Config/5.3.4.png)
 
 ### Kiểm tra và Xác nhận Kết quả
 Hãy đảm bảo rằng dữ liệu đã được cấu trúc và nhập vào thành công bằng các câu lệnh truy vấn sau:
-- Kiểm tra danh sách Database:
+- Kiểm tra xem đã có database **tablecloudpos** và dữ liệu **Clients**:
 ```sql
 SHOW DATABASES;
-```
-- Bạn sẽ thấy database fcjresbar xuất hiện trong danh sách
 
-Kiểm tra chi tiết dữ liệu:
-- Truy cập vào database:
-```sql
 USE fcjresbar;
-```
 
-- Truy vấn bảng dữ liệu:
-```sql
 SELECT * FROM Clients;
 ```
+![5.3.5](/images/5.EC2Config/5.3.5.png)
 
+{{% notice tip %}}
 Lưu ý: Nếu bạn không thể kết nối, hãy kiểm tra lại Inbound Rules của Security Group gán cho RDS. Đảm bảo port 3306 đã được mở cho Security Group của máy chủ EC2.
+{{% /notice %}}
