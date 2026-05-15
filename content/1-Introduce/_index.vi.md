@@ -6,6 +6,7 @@ chapter : false
 pre : " <b> 1. </b> "
 ---
 Workshop này hướng dẫn quy trình toàn diện từ đóng gói đến vận hành ứng dụng trên Docker Container. Bạn sẽ thực hành quản lý vòng đời ứng dụng thông qua các dịch vụ cốt lõi: Docker Hub, Nginx, Amazon ECR, Amazon RDS và Amazon EC2.
+![cloud_docker_architect](/images/arc/cloud_docker_architect.png)
 
 ### Hệ thống dịch vụ sử dụng
 - **Docker Hub**: Public Registry để lưu trữ và chia sẻ Docker Images.

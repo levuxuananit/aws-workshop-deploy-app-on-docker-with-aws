@@ -10,6 +10,7 @@ Why should we containerize applications with **Docker Container** instead of run
 For an application to operate reliably and smoothly handle user requests (CRUD operations), it must consume hardware resources from the host server. However, traditional deployment often leads to the "it works on my machine" syndrome due to environment discrepancies.
 
 In this section, we will deploy a sample application directly on your machine to observe how Docker effectively resolves environment conflicts and optimizes resource management.
+![local_architect](/images/arc/local_architect.png)
 
 ### Content
 1. [Environment Setup](2-Local/2.1-Setup)

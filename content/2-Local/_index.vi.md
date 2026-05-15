@@ -10,6 +10,7 @@ Tại sao chúng ta nên đóng gói ứng dụng trong **Docker Container** tha
 Để một ứng dụng hoạt động ổn định và xử lý mượt mà các yêu cầu từ người dùng (thêm, sửa, xóa dữ liệu...), hệ thống cần tiêu tốn tài nguyên phần cứng từ máy chủ (Host). Tuy nhiên, việc triển khai truyền thống thường gặp lỗi "máy tôi chạy được nhưng máy khác thì không" do sự khác biệt về môi trường.
 
 Trong phần này, chúng ta sẽ bắt đầu triển khai một ứng dụng mẫu ngay trên máy tính của bạn để quan sát cách Docker giải quyết vấn đề xung đột môi trường và quản lý tài nguyên hiệu quả như thế nào.
+![local_architect](/images/arc/local_architect.png)
 
 ### Nội dung
 1. [Cài đặt môi trường](2-Local/2.1-Setup)

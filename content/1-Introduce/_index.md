@@ -6,6 +6,7 @@ chapter : false
 pre : " <b> 1. </b> "
 ---
 This workshop provides a comprehensive guide to the end-to-end process of containerizing and operating applications using Docker. You will gain hands-on experience managing the application lifecycle through core services: Docker Hub, Nginx, Amazon ECR, Amazon RDS, and Amazon EC2.
+![cloud_docker_architect](/images/arc/cloud_docker_architect.png)
 
 ### Core Services
 - **Docker Hub**: A public registry used to store and share Docker images.

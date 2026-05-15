@@ -9,6 +9,7 @@ pre: "<b>7.</b>"
 This is the most important "upgrade" step in the deployment process. Instead of running each `docker build` and `docker run` command for each service as in the previous section, we will use **Docker Compose** to manage the entire system with a single configuration file.
 
 Below is the standard deployment method for a **Software & Cloud Engineer**:
+![docker_compose](/images/arc/docker_compose.png)
 
 ### Contents
 1. [Deploy Application](7-DockerCompose/7.1-DeployApp)
