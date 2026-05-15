@@ -1,28 +1,37 @@
 # WORKSHOP DEPLOYING DOCKERIZED APPS ON AWS
 
-Master the end-to-end process of containerizing and deploying a fullstack application (React & Node.js) on AWS infrastructure.
+This workshop provides a comprehensive guide to the end-to-end process of containerizing and operating applications using Docker. You will gain hands-on experience managing the application lifecycle through core services: **Docker Hub**, **Nginx**, **Amazon ECR**, **Amazon RDS**, and **Amazon EC2**.
+![white-cloud_docker-architect](static/images/arc/white-cloud_docker-architect.png)
 
 ---
 
 ### Core Services
-- **Docker Hub / Amazon ECR**: Public and Private registries for managing Docker Images.
-- **Nginx**: Functions as a Reverse Proxy and Load Balancer for efficient traffic routing.
-- **Amazon RDS**: Managed relational database for automated maintenance and high security.
-- **Amazon EC2**: Scalable compute instances to host and run your containers.
+- **Docker Hub**: A public registry used to store and share Docker images.
+- **Nginx**: Functions as a Reverse Proxy and Load Balancer to optimize traffic distribution and scalability.
+- **Amazon ECR**: A secure, fully-managed private registry on AWS, deeply integrated for image management and deployment.
+- **Amazon RDS**: A managed database service that automates operations and ensures data security.
+- **Amazon EC2**: Virtual server infrastructure (Compute) used to run Docker containers.
 
 ---
 
 ### System Architecture
-- **Ingress**: Client Requests enter the VPC via the Internet Gateway.
-- **Routing**: Nginx proxies traffic to either the Frontend (React) or Backend (Node.js) containers.
-- **Data**: The Backend performs CRUD operations on Amazon RDS and returns the Response through Nginx.
-- **CI/CD**: New Images are Pushed to ECR/Docker Hub and Deployed onto EC2 instances.
+- **Traffic Ingress**: Client requests are sent over the Internet, passing through the Internet Gateway to enter the AWS VPC environment.
+- **Reverse Proxy & Routing**: Nginx receives the traffic and acts as a Reverse Proxy, routing requests to the appropriate containers: Backend and Frontend containers.
+
+- **App Logic & Data Processing**:
+    - The Frontend (**React**) sends requests to the Backend (Node.js) for business logic processing.
+    - The Backend (**Node.js**) executes CRUD queries with Amazon RDS.
+    - After processing, data is sent back (Response) via the reverse flow: Backend → Nginx → Client.
+- **CI/CD & Image Management**:
+    - When the source code (React/Node.js) is updated, new Docker images are built and pushed to Docker Hub or Amazon ECR.
+    - From these registries, the application is deployed or updated directly onto Amazon EC2 instances.
 
 ---
 
-### Quick Notes
-- **Best Practice**: For production, leverage Amazon ECS or EKS for advanced orchestration.
-- **Security**: Configure Security Groups strictly to authorize traffic between Nginx, Backend, and RDS.
-- **Cost**: Use the AWS Billing Dashboard and perform a Cleanup of all resources after the workshop to avoid unnecessary charges.
+### Resources
+| Mục tiêu | Liên kết |
+| :--- | :--- |
+| **Workshop Link** | [ Deploying Dockerized Applications on AWS]([https://...](https://levuxuananit.github.io/aws-workshop-deploy-app-on-docker-with-aws/1-introduce/)) |
+| **Source Code** | [GitHub Repo]([https://...](https://github.com/levuxuananit/aws-table-cloud-pos)) |
 
 ---
