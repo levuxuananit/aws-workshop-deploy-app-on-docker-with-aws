@@ -31,7 +31,7 @@ This workshop provides a comprehensive guide to the end-to-end process of contai
 ### Resources
 | Mục tiêu | Liên kết |
 | :--- | :--- |
-| **Workshop Link** | [ Deploying Dockerized Applications on AWS]([https://...](https://levuxuananit.github.io/aws-workshop-deploy-app-on-docker-with-aws/1-introduce/)) |
-| **Source Code** | [GitHub Repo]([https://...](https://github.com/levuxuananit/aws-table-cloud-pos)) |
+| **Workshop Link** | [ Deploying Dockerized Applications on AWS](https://levuxuananit.github.io/aws-workshop-deploy-app-on-docker-with-aws/1-introduce/) |
+| **Source Code** | [GitHub Repo](https://github.com/levuxuananit/aws-table-cloud-pos) |
 
 ---
